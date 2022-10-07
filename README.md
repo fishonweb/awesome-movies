@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/fishonweb/awesome-movies/branch/main/graph/badge.svg?token=NzaNT0Jeyb)](https://codecov.io/gh/fishonweb/awesome-movies)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
