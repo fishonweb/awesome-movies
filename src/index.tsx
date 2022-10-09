@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import MovieDetails from './components/MovieDetails/movieDetails.component';
+import Home from './pages/home.page';
+import Root from './pages/root.page';
 import reportWebVitals from './reportWebVitals';
+import GlobalStyles from './styles/global.styles';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      { path: '/', element: <Home /> },
+      {
+        path: 'movies/:movieId',
+        element: <MovieDetails />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <GlobalStyles darkTheme={false} />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
 

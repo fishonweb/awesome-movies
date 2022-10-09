@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import device from '../../utils/devices';
 
 interface IMovieProps {
   posterPath: string;
   title: string;
+  movieId?: number;
 }
 
 const MovieWrapper = styled.div`
@@ -14,13 +16,6 @@ const MovieWrapper = styled.div`
   @media ${device.laptop} {
     width: 200px;
   }
-
-  h1 {
-    display: none;
-    opacity: 0;
-    text-align: center;
-    padding: 1rem;
-  }
   img {
     transition: opacity 0.2s linear;
     display: block;
@@ -28,23 +23,34 @@ const MovieWrapper = styled.div`
     height: 100%;
   }
   &:hover img {
-    opacity: 0.5;
+    opacity: 0.3;
   }
   &:hover h1 {
     display: block;
     position: absolute;
     bottom: 0;
     opacity: 1;
+    color: #000000;
   }
 `;
 
-const Movie: React.FC<IMovieProps> = ({ posterPath, title }) => {
+const MovieTitle = styled.h1`
+  display: none;
+  opacity: 0;
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+`;
+
+const Movie: React.FC<IMovieProps> = ({ posterPath, title, movieId }) => {
   return (
     <>
-      <MovieWrapper data-testid="movie-wrapper">
-        <img src={`${process.env.REACT_APP_TMDB_POSTER_PREFIX}${posterPath}`} alt={title} />
-        <h1 data-testid="movie-title">{title}</h1>
-      </MovieWrapper>
+      <Link to={`movies/${movieId}`}>
+        <MovieWrapper data-testid="movie-wrapper">
+          <img src={`${process.env.REACT_APP_TMDB_POSTER_PREFIX}${posterPath}`} alt={title} />
+          <MovieTitle data-testid="movie-title">{title}</MovieTitle>
+        </MovieWrapper>
+      </Link>
     </>
   );
 };
