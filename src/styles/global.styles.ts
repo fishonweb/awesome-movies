@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyles = createGlobalStyle<{ darkTheme?: boolean }>`
+const GlobalStyles = createGlobalStyle<{ theme: any }>`
     ${reset}
 
     :root{
-        --background: ${(props) => (props.darkTheme ? '#4B5563' : '#FFFFFF')};
-        --header: ${(props) => (props.darkTheme ? '#1F2937' : '#60A5FA')};
+        --background: ${(props) => (props.theme.darkTheme ? '#4B5563' : '#FFFFFF')};
+        --header: ${(props) => (props.theme.darkTheme ? '#1F2937' : '#60A5FA')};
     }
 
     *{
@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle<{ darkTheme?: boolean }>`
 
     body {
         background: var(--background);
+        color: ${(props) => (props.theme.darkTheme ? '#FFFFFF' : '#000000')}
     }
 `;
 

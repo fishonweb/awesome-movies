@@ -1,31 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MovieDetails from './components/MovieDetails/movieDetails.component';
-import Home from './pages/home.page';
-import Root from './pages/root.page';
+import { RouterProvider } from 'react-router-dom';
+import { CustomThemeProvider } from './customThemeProvider';
 import reportWebVitals from './reportWebVitals';
+import router from './routes/router.routes';
 import GlobalStyles from './styles/global.styles';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      { path: '/', element: <Home /> },
-      {
-        path: 'movies/:movieId',
-        element: <MovieDetails />,
-      },
-    ],
-  },
-]);
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <React.StrictMode>
-    <GlobalStyles darkTheme={false} />
-    <RouterProvider router={router} />
+    <CustomThemeProvider>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </CustomThemeProvider>
   </React.StrictMode>,
 );
 

@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon/icon.component';
+import debounce from 'lodash/debounce';
 
 interface ISearchBarProps {
   placeholder?: string;
@@ -8,12 +9,13 @@ interface ISearchBarProps {
 }
 
 const SearchBarWrapper = styled.div`
-  margin-top: 1rem;
-  width: 100%;
+  width: 90%;
+  margin: 1rem auto 0 auto;
   position: relative;
 `;
 
 const Input = styled.input`
+  display: block;
   width: 100%;
   padding: 0.5rem;
 `;
@@ -29,8 +31,13 @@ const Reset = styled.div`
 const SearchBar: React.FC<ISearchBarProps> = ({ placeholder, getMovieQuery }) => {
   const [query, setQuery] = useState('');
 
+  const debouncedQuery = debounce(() => {
+    getMovieQuery(query);
+  }, 700);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
+    debouncedQuery();
   };
 
   const handleReset = () => {
@@ -42,10 +49,18 @@ const SearchBar: React.FC<ISearchBarProps> = ({ placeholder, getMovieQuery }) =>
     event.preventDefault();
     getMovieQuery(query);
   };
+
   return (
     <SearchBarWrapper>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <Input type="text" placeholder={placeholder || ''} value={query} name="movieQuery" onChange={(event) => handleChange(event)} />
+        <Input
+          data-testid="searchinput"
+          type="text"
+          placeholder={placeholder || ''}
+          value={query}
+          name="movieQuery"
+          onChange={(event) => handleChange(event)}
+        />
         {query && (
           <Reset onClick={handleReset}>
             <Icon>close</Icon>

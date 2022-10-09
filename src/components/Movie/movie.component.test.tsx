@@ -8,7 +8,7 @@ describe('<Movie />', () => {
     title: 'movie title',
     movieId: 12345,
   };
-  it('should render props', () => {
+  it('should render <Movie /> props', () => {
     render(
       <Router>
         <Movie {...props} />

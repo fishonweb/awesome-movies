@@ -52,10 +52,10 @@ const MovieDetails: React.FC = () => {
     <>
       <MovieDetailsWrapper>
         <MovieDescription>
-          <MovieTitle>{movieDetails?.title}</MovieTitle>
-          <MovieSynopsis>{movieDetails?.overview}</MovieSynopsis>
+          <MovieTitle data-testid="movietitle">{movieDetails?.title}</MovieTitle>
+          <MovieSynopsis data-testid="moviesynopsis">{movieDetails?.overview}</MovieSynopsis>
         </MovieDescription>
-        <MoviePoster src={`${process.env.REACT_APP_TMDB_POSTER_PREFIX}${movieDetails?.poster_path}`} alt="" />
+        <MoviePoster data-testid="movieposter" src={`${process.env.REACT_APP_TMDB_POSTER_PREFIX}${movieDetails?.poster_path}`} alt="" />
       </MovieDetailsWrapper>
     </>
   );

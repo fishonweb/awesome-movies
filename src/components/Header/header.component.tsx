@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useUpdateTheme } from '../../customThemeProvider';
 import Icon from '../Icon/icon.component';
+import ToggleTheme from '../Toggle/toggle.component';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -28,6 +30,8 @@ const Header: React.FC = () => {
     }
   }, [location]);
 
+  const updateTheme = useUpdateTheme();
+
   return (
     <>
       <HeaderWrapper>
@@ -39,7 +43,13 @@ const Header: React.FC = () => {
           )}
         </div>
         <div>MOVIES</div>
-        <div></div>
+        <ToggleTheme
+          onChange={(e) =>
+            updateTheme({
+              darkTheme: e,
+            })
+          }
+        />
       </HeaderWrapper>
     </>
   );
