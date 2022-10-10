@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon/icon.component';
 import debounce from 'lodash/debounce';
@@ -30,14 +30,16 @@ const Reset = styled.div`
 
 const SearchBar: React.FC<ISearchBarProps> = ({ placeholder, getMovieQuery }) => {
   const [query, setQuery] = useState('');
-
   const debouncedQuery = debounce(() => {
     getMovieQuery(query);
   }, 700);
 
+  useEffect(() => {
+    debouncedQuery();
+  }, [debouncedQuery, query]);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
-    debouncedQuery();
   };
 
   const handleReset = () => {

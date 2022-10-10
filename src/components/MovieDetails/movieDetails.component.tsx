@@ -35,6 +35,11 @@ const MoviePoster = styled.img`
     max-width: 300px;
   }
 `;
+
+const MovieVote = styled.div`
+  margin-bottom: 2rem;
+`;
+
 const MovieDetails: React.FC = () => {
   let { movieId } = useParams();
 
@@ -48,12 +53,16 @@ const MovieDetails: React.FC = () => {
   useEffect(() => {
     getMovieDetail(movieId);
   }, [movieId]);
+
+  const vote = movieDetails?.vote_average ? Math.round(movieDetails.vote_average) : '?';
+
   return (
     <>
       <MovieDetailsWrapper>
         <MovieDescription>
           <MovieTitle data-testid="movietitle">{movieDetails?.title}</MovieTitle>
           <MovieSynopsis data-testid="moviesynopsis">{movieDetails?.overview}</MovieSynopsis>
+          <MovieVote>{vote}/10</MovieVote>
         </MovieDescription>
         <MoviePoster data-testid="movieposter" src={`${process.env.REACT_APP_TMDB_POSTER_PREFIX}${movieDetails?.poster_path}`} alt="" />
       </MovieDetailsWrapper>
