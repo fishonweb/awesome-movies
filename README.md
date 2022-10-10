@@ -1,6 +1,15 @@
 [![codecov](https://codecov.io/gh/fishonweb/awesome-movies/branch/main/graph/badge.svg?token=NzaNT0Jeyb)](https://codecov.io/gh/fishonweb/awesome-movies)
 
-# Getting Started with Create React App
+# Awesome Movie App
+
+## Quickstart
+
+- Clone this repository
+- Copy `.env.example` file as `.env` with `cp .env.example .env` and replace `yourTMDBToken` with your own token
+- Run `npm i`
+- Run `npm start` and open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
